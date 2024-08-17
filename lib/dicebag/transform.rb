@@ -9,8 +9,12 @@ module DiceBag
     def self.hashify_options(options)
       opts = {}
 
-      options.each { |val| opts.update val } if options.respond_to? :each
-
+      if options.respond_to? :each
+        options.reject{ |o| o.key?(:target) }.each { |val| opts.update val } 
+        targets = { targets: options.select{ |o| o.key?(:target) }.map{ |o| o[:target] } }
+        opts.update targets
+      end
+      
       opts
     end
 
@@ -23,6 +27,7 @@ module DiceBag
     rule(reroll:  simple(:x)) { { reroll: Integer(x) } }
     rule(reroll_indefinite:  simple(:x)) { { reroll_indefinite: Integer(x) } }
     rule(target:  simple(:x)) { { target: Integer(x) } }
+
     rule(failure: simple(:x)) { { failure: Integer(x) } }
     rule(botch:   simple(:x)) { { botch: Integer(x) } }
 

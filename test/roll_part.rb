@@ -139,6 +139,20 @@ describe DiceBag::RollPart do
       end
     end
 
+    describe 'with no options and two targets' do
+      before do
+        @part = xdx('3d6 t4 t6').first.last
+
+        make_not_so_random!
+
+        @part.roll
+      end
+
+      it 'should have a total of 3' do
+        _(@part.total).must_equal 3
+      end
+    end
+
     describe 'with an exploding option' do
       before do
         @part = xdx('3d6 e1 t4').first.last

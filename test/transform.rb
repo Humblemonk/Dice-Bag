@@ -46,4 +46,47 @@ describe DiceBag::Transform do
       _(@ast.first[1][:xdx][:count]).must_equal 1
     end
   end
+
+  describe 'with a target value' do
+    before do
+      tree = DiceBag::Parser.new.parse '5d6 t7'
+      @ast = DiceBag::Transform.new.apply tree
+    end
+
+    it 'must have a :targets key' do
+       _(@ast[1][:options].key?(:targets)).must_equal true
+    end
+
+    it ':targets key should be an Array' do
+      _(@ast[1][:options][:targets]).must_be_instance_of Array
+    end
+
+    it ':targets key contain our target' do
+      _(@ast[1][:options][:targets][0]).must_equal 7
+    end
+  end
+
+  describe 'with two target values' do
+    before do
+      tree = DiceBag::Parser.new.parse '5d6 t7 t10'
+      @ast = DiceBag::Transform.new.apply tree
+    end
+
+    it 'must have a :targets key' do
+       _(@ast[1][:options].key?(:targets)).must_equal true
+    end
+
+    it ':targets key should be an Array' do
+      _(@ast[1][:options][:targets]).must_be_instance_of Array
+    end
+
+    it ':targets key contain our first target' do
+      _(@ast[1][:options][:targets][0]).must_equal 7
+    end
+
+    it ':targets key contain our second target' do
+      _(@ast[1][:options][:targets][1]).must_equal 10
+    end
+  end
+
 end

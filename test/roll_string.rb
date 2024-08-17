@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 
 describe RollString do
-  ROLL_DSTR = '(Test) 4d6 d1 k1 r2 t4'.freeze
+  ROLL_DSTR = '(Test) 4d6 d1 k1 r2 t4 t6'.freeze
 
   before do
     @roll = DiceBag::Roll.new ROLL_DSTR

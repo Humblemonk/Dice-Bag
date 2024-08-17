@@ -82,9 +82,7 @@ module RollPartString
   end
 
   def to_s_target
-    return if @options[:target].zero?
-
-    @parts.push format('t%s', @options[:target])
+    @options[:targets].each{ |target| @parts.push format('t%s', target) }
   end
 
   def to_s_failure

@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 
 describe RollPartString do
-  ROLL_PART_DSTR = '4d6 d1 k1 r2 t4'.freeze
+  ROLL_PART_DSTR = '4d6 d1 k1 r2 t4 t6'.freeze
 
   before do
     @part = xdx(ROLL_PART_DSTR).first.last

@@ -24,7 +24,7 @@ module DiceBag
 
       # Our Default Options
       
-      @options = { explode: 0, explode_indefinite: 0, drop: 0, keep: 0, keeplowest: 0, reroll: 0, reroll_indefinite: 0, target: 0, failure: 0, botch: 0 }
+      @options = { explode: 0, explode_indefinite: 0, drop: 0, keep: 0, keeplowest: 0, reroll: 0, reroll_indefinite: 0, targets: [], failure: 0, botch: 0 }
 
       @options.update(part[:options]) if part.key?(:options)
     end
@@ -198,9 +198,9 @@ module DiceBag
       # in the results are >= than this number and subtract
       # the number <= the failure threshold, otherwise
       # we just add up all the numbers.
-      @total = if (@options[:target] || @options[:failure]) && ( @options[:target] > 0 || @options[:failure] > 0 )
-                 if @options[:target] && @options[:target] > 0
-                   @results.count {|r| r >= @options[:target] } - @results.count { |r| r <= @options[:failure] }
+      @total = if (@options[:targets] || @options[:failure]) && ( @options[:targets].length > 0 || @options[:failure] > 0 )
+                 if @options[:targets] && @options[:targets].length > 0
+                    @options[:targets].map{ |target| @results.count {|r| r >= target } - @results.count { |r| r <= @options[:failure] }  }.sum
                  else
                    0 - @results.count { |r| r <= @options[:failure] }
                  end 

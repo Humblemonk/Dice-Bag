@@ -109,7 +109,10 @@ the target number is added to a total of successes. For example, '5d10
 t8' means roll five 10-sided dice and each die that is 8 or higher is a
 success. (Similar to WhiteWolf games.) If this option is given a 0 value,
 that is the same as not having the option at all; that is, a normal sum
-of all dice in the roll is performed instead. 
+of all dice in the roll is performed instead.  This can be specified more
+than once and each dice will be counted the number of targets it matches.
+ie: "6d10 t7 t10" will give you a count of each 7 or above counting any 
+10s twice.
 
 **f#** - this denotes a failure number that each dice must match or be
 beneath in order to count against successes. These work as a sort of 
